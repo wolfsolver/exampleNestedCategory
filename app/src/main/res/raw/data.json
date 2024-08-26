@@ -1,0 +1,42 @@
+[
+  {
+    "title": "House",
+    "value": 10,
+    "childrens": [
+      {
+        "title": "Bill",
+        "value": 20,
+        "childrens": [
+          {"title": "Gas", "value": 30, "childrens": []},
+          {"title": "Electricity", "value": 40, "childrens": []},
+          {"title": "Internet", "value": 50, "childrens": []},
+          {"title": "Telephone", "value": 60, "childrens": []},
+          {
+            "title": "Entertainment",
+            "value": 70,
+            "childrens": [
+              {"title": "Spotify", "value": 80, "childrens": []},
+              {"title": "Netflix", "value": 90, "childrens": []},
+              {"title": "Prime"  , "value": 100, "childrens": []}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Income ",
+    "value": 0,
+    "childrens": [
+      {"title": "Salary", "value": 1000, "childrens": []},
+      {
+        "title": "Other Income",
+        "value": 100,
+        "childrens": [
+          {"title": "Investment Income"    , "value": 500, "childrens": []},
+          {"title": "Reimbursement/Refunds", "value": 500, "childrens": []}
+        ]
+      }
+    ]
+  }
+]

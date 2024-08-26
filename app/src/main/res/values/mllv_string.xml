@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="multiplied_expanding">Multiplied expanding</string>
+    <string name="always_expanded">Always expanded</string>
+</resources>
