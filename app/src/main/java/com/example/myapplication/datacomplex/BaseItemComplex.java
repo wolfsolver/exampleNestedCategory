@@ -23,22 +23,22 @@ import java.util.List;
 
 public class BaseItemComplex {
     private String mName;
-    private Number mvalue;
+    private Double mvalue;
     private List<BaseItemComplex> mChildrens;
 
     public BaseItemComplex(String name) {
         mName = name;
-        mvalue = 0;
+        mvalue = 0.0;
         mChildrens = new ArrayList<>();
     }
 
-    public BaseItemComplex(String name, Number value) {
+    public BaseItemComplex(String name, Double value) {
         mName = name;
         mvalue = value;
         mChildrens = new ArrayList<>();
     }
 
-    public BaseItemComplex(String name, Number value, List<BaseItemComplex> childrens) {
+    public BaseItemComplex(String name, Double value, List<BaseItemComplex> childrens) {
         mName = name;
         mvalue = value;
         mChildrens = childrens;
@@ -48,10 +48,27 @@ public class BaseItemComplex {
         return mName;
     }
 
-    public Number getValue() { return mvalue; }
+    public Double getValue() { return mvalue; }
+    public void setValue(Double value) { mvalue = value ;}
+
+    public Double getValueWithChildrens(){
+        Double total = mvalue ;
+        if (hasChildren()) {
+            for (BaseItemComplex item : mChildrens) {
+                total = total + item.getValueWithChildrens();
+            }
+        }
+        return total;
+    }
 
     public List<BaseItemComplex> getChildren() { return mChildrens; }
     public void setChildren(List<BaseItemComplex> childrens) { mChildrens = childrens; }
+    public void addChildren(BaseItemComplex item) {
+      mChildrens.add(item);
+    }
+    public void addChildren(int i, BaseItemComplex item) {
+        mChildrens.add(i,item);
+    }
 
     public boolean hasChildren() { return mChildrens.size() > 0; }
 }

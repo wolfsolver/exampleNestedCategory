@@ -45,6 +45,7 @@ public class DataActivityComplex extends Activity {
 
     private MultiLevelListView mListView;
     private Switch mReportMode;
+    private Switch mApplicationMode;
 
 //    private boolean mAlwaysExpandend;
 
@@ -68,6 +69,7 @@ public class DataActivityComplex extends Activity {
 
         mListView = (MultiLevelListView) findViewById(R.id.listView);
         mReportMode = (Switch) findViewById(R.id.reportMode);
+        mApplicationMode = (Switch) findViewById(R.id.applicationMode);
 
         ListAdapter listAdapter = new ListAdapter();
 
@@ -75,9 +77,9 @@ public class DataActivityComplex extends Activity {
         mListView.setOnItemClickListener(mOnItemClickListener);
 
         mReportMode.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mApplicationMode.setOnCheckedChangeListener(mOnCheckedChangeListener);
 
-
-        listAdapter.setDataItems(DataProviderComplex.getInstance().getSubItems());
+        listAdapter.setDataItems(DataProviderComplex.getInstance(mApplicationMode.isChecked()).getSubItems());
     }
 
     private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -86,6 +88,12 @@ public class DataActivityComplex extends Activity {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (buttonView.getId() == R.id.reportMode) {
                 mReportMode.setChecked(isChecked);
+                mListView.notifyDataSetChanged();
+            } else if (buttonView.getId() == R.id.applicationMode) {
+                ListAdapter listAdapter = new ListAdapter();
+                mListView.setAdapter(listAdapter);
+                listAdapter.setDataItems(DataProviderComplex.getInstance(mApplicationMode.isChecked()).getSubItems());
+                mApplicationMode.setChecked(isChecked);
                 mListView.notifyDataSetChanged();
             }
         }
@@ -127,7 +135,8 @@ public class DataActivityComplex extends Activity {
 
         @Override
         public List<?> getSubObjects(Object object) {
-            return DataProviderComplex.getInstance().getSubItems((BaseItemComplex) object);
+            List<BaseItemComplex> list = DataProviderComplex.getInstance().getSubItems((BaseItemComplex) object);
+            return list;
         }
 
         @Override

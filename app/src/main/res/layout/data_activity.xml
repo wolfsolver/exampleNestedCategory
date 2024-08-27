@@ -5,16 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Switch
-        android:id="@+id/reportMode"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Report Mode"
-        android:padding="@dimen/padding_default"
-        android:switchPadding="@dimen/padding_default"
-        android:gravity="right|center_vertical"
-        android:textSize="@dimen/font_default"
-        android:layout_marginBottom="@dimen/offset_default"/>
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/applicationMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/offset_default"
+            android:gravity="right|center_vertical"
+            android:padding="@dimen/padding_default"
+            android:switchPadding="@dimen/padding_default"
+            android:text="Application Mode"
+            android:textSize="@dimen/font_default" />
+
+
+        <Switch
+            android:id="@+id/reportMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/offset_default"
+            android:gravity="right|center_vertical"
+            android:padding="@dimen/padding_default"
+            android:switchPadding="@dimen/padding_default"
+            android:text="Report Mode"
+            android:textSize="@dimen/font_default" />
+
+    </LinearLayout>
+
 
     <com.example.myapplication.multilevellistview.MultiLevelListView
         android:id="@+id/listView"
