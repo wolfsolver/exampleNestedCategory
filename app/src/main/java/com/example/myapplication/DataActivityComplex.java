@@ -46,7 +46,7 @@ public class DataActivityComplex extends Activity {
     private MultiLevelListView mListView;
     private Switch mReportMode;
 
-    private boolean mAlwaysExpandend;
+//    private boolean mAlwaysExpandend;
 
     static private Context mContext;
     public static Context getContext() {
@@ -110,7 +110,7 @@ public class DataActivityComplex extends Activity {
 
         @Override
         public void onGroupItemClicked(MultiLevelListView parent, View view, Object item, ItemInfo itemInfo) {
-            showItemDescription(item, itemInfo);
+//            showItemDescription(item, itemInfo);
         }
     };
 
@@ -171,7 +171,18 @@ public class DataActivityComplex extends Activity {
             String moneyString = formatter.format(item.getValue());
             viewHolder.valueView.setText(moneyString);
 
-            if (itemInfo.isExpandable() && !mAlwaysExpandend) {
+            viewHolder.selectView.setTag(R.string.tag_node,item);
+            viewHolder.selectView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    BaseItemComplex item = (BaseItemComplex) v.getTag(R.string.tag_node);
+                    Toast.makeText(DataActivityComplex.this, "Item Select"+item.getName(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            if (itemInfo.isExpandable()) {
                 viewHolder.arrowView.setVisibility(View.VISIBLE);
                 viewHolder.arrowView.setImageResource(itemInfo.isExpanded() ?
                         R.drawable.arrow_up : R.drawable.arrow_down);
@@ -183,10 +194,10 @@ public class DataActivityComplex extends Activity {
 
             if (mReportMode.isChecked())  {
                 viewHolder.valueView.setVisibility(View.VISIBLE);
-//                viewHolder.selectView.setVisibility(View.GONE);
+                viewHolder.selectView.setVisibility(View.GONE);
             } else {
                 viewHolder.valueView.setVisibility(View.GONE);
-//                viewHolder.selectView.setVisibility(View.VISIBLE);
+                viewHolder.selectView.setVisibility(View.VISIBLE);
             }
 
             return convertView;
