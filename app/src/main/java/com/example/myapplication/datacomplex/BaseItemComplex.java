@@ -52,8 +52,10 @@ public class BaseItemComplex {
     public void setValue(Double value) { mvalue = value ;}
 
     public Double getValueWithChildrens(){
-        Double total = mvalue ;
-        if (hasChildren()) {
+        Double total = 0.0;
+        if (!hasChildren()) {
+            total = mvalue;
+        } else {
             for (BaseItemComplex item : mChildrens) {
                 total = total + item.getValueWithChildrens();
             }

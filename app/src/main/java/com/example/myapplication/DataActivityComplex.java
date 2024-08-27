@@ -90,6 +90,11 @@ public class DataActivityComplex extends Activity {
                 mReportMode.setChecked(isChecked);
                 mListView.notifyDataSetChanged();
             } else if (buttonView.getId() == R.id.applicationMode) {
+                if (mApplicationMode.isChecked()) {
+                    mApplicationMode.setText("Simplified mode");
+                } else {
+                    mApplicationMode.setText("Normal mode");
+                }
                 ListAdapter listAdapter = new ListAdapter();
                 mListView.setAdapter(listAdapter);
                 listAdapter.setDataItems(DataProviderComplex.getInstance(mApplicationMode.isChecked()).getSubItems());
@@ -197,6 +202,7 @@ public class DataActivityComplex extends Activity {
                         R.drawable.arrow_up : R.drawable.arrow_down);
             } else {
                 viewHolder.arrowView.setVisibility(View.GONE);
+                viewHolder.selectView.setVisibility(View.GONE);
             }
 
             viewHolder.levelBeamView.setLevel(itemInfo.getLevel());
@@ -206,7 +212,13 @@ public class DataActivityComplex extends Activity {
                 viewHolder.selectView.setVisibility(View.GONE);
             } else {
                 viewHolder.valueView.setVisibility(View.GONE);
-                viewHolder.selectView.setVisibility(View.VISIBLE);
+                if (mApplicationMode.isChecked()) {
+                    viewHolder.selectView.setVisibility(View.GONE);
+                } else if (itemInfo.isExpandable()) {
+                    viewHolder.selectView.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.selectView.setVisibility(View.GONE);
+                }
             }
 
             return convertView;
