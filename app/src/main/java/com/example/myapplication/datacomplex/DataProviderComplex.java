@@ -75,8 +75,8 @@ public class DataProviderComplex {
                 if (itemObject.has("childrens")) {
                     item.setChildren(parseJSONArray(itemObject.getJSONArray("childrens"), withSelf));
                     if (withSelf && item.hasChildren()) {
-                        item.setValue(0.0);
                         item.addChildren(0,(new BaseItemComplex("_"+item.getName(), item.getValue())));
+                        item.setValue(0.0);
                         item.setValue(item.getValueWithChildrens());
                     }
                 }
