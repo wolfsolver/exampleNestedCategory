@@ -72,7 +72,7 @@ public class LevelBeamView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = mPadding + (mLevel + 1) * (mLinesWidth + mLinesOffset);
+        int width = mPadding + (mLevel) * (mLinesWidth + mLinesOffset) + mPadding;
         int height = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(width, height);
     }
@@ -80,13 +80,14 @@ public class LevelBeamView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (int lvl = 0; lvl <= mLevel; lvl++) {
+        if (mLevel <= 0) { return; }
+        for (int lvl = 1; lvl <= mLevel; lvl++) {
             float LINE_X = mPadding + lvl * mLinesWidth;
             if (lvl >= 1) {
-                LINE_X += lvl * mLinesOffset;
+                LINE_X += lvl * mLinesOffset ;
             }
 //            mLinePaint.setColor(getColor(getColorResIdForLevel(lvl)));
-            mLinePaint.setColor(Color.GRAY);
+            mLinePaint.setColor(Color.GREEN);
             canvas.drawLine(LINE_X, 0, LINE_X, canvas.getHeight(), mLinePaint);
         }
     }
